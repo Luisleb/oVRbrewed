@@ -19,7 +19,13 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     [SerializeField] private bool waiting_potion;
     [SerializeField] private bool PreparingPotion;
- 
+
+    string[] askedRecipe = new string[] { };
+    string[] recipe1 = new string[] { "Mushroom 1", "LightingPlant1" }; //lumiere jaune
+    string[] recipe2 = new string[] { "Mushroom 1", "Mushroom 3", "bat_wing2" }; //invisibilité blanche
+    string[] recipe3 = new string[] { "Mushroom 2", "bat_wing2", "PlantEx2" }; //heal rouge
+    string[] recipe4 = new string[] { "Mushroom 3", "PlantEx2" }; //poison
+
     private void Start()
     {
         StartTime();
@@ -43,7 +49,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         {
             CharacterID = (int)Random.Range(0, ListCharacters.Count);
 
-            Character = Instantiate(ListCharacters[ CharacterID ]);
+            Character = Instantiate(ListCharacters[CharacterID]);
 
             Character.transform.position = PositionSpawn.position;
             Character.transform.rotation = PositionSpawn.rotation;
@@ -110,6 +116,15 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
             }
         }
 
+    }
+    public string[] AskedRecipe()
+    {
+        return askedRecipe;
+    }
+
+    public bool IsWaitingPotion()
+    {
+        return waiting_potion;
     }
 
     public void CollideMushroom()
