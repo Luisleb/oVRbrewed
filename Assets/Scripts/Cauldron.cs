@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Cauldron : MonoBehaviour
 {
-    List<string> melange = new List<string>();
+    [SerializeField] List<string> melange = new List<string>();
 
     string[] recipe1 = new string[] { "Mushroom 1", "LightingPlant1"}; //lumiere jaune
     string[] recipe2 = new string[] { "Mushroom 1", "Mushroom 3", "bat_wing2"}; //invisibilité blanche
@@ -20,7 +20,7 @@ public class Cauldron : MonoBehaviour
             melange.Add(collision.transform.name);
             collision.transform.localPosition = new Vector3(0, 0, 0);
         }
-        if (collision.transform.tag == "Fiole" && GameManager.Instance.IsWaitingPotion())
+        if (collision.transform.tag == "Flask" && GameManager.Instance.IsWaitingPotion())
         {
             collision.transform.GetComponent<Flask>().SetMelange(melange); 
             //Reset de la marmite

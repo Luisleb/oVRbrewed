@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8792676500012673086}
   - component: {fileID: 8792676500011378718}
   - component: {fileID: 8792676500010379998}
-  - component: {fileID: 8561687695744820256}
   - component: {fileID: 9016847255414871981}
-  - component: {fileID: 3309298672461859489}
+  - component: {fileID: 5810418479552169646}
+  - component: {fileID: 4121328920529814304}
   m_Layer: 0
   m_Name: LightingPlant1
   m_TagString: Untagged
@@ -87,20 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8561687695744820256
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8792676500012381214}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.19291586
-  m_Height: 0.60792345
-  m_Direction: 1
-  m_Center: {x: 0.08442673, y: 0.30396172, z: -0.103868544}
 --- !u!54 &9016847255414871981
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -117,7 +103,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3309298672461859489
+--- !u!64 &5810418479552169646
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8792676500012381214}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 5a354059445b3474fbd658226ba1efdd, type: 3}
+--- !u!114 &4121328920529814304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

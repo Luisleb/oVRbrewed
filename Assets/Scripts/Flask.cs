@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Flask : MonoBehaviour
 {
-    private List<string> melange;
+    [SerializeField] private List<string> melange;
 
     public void SetMelange(List<string> p_melange)
     {

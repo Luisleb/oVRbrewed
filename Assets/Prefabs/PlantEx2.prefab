@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3848391665048604326}
   - component: {fileID: 3848391665049570406}
   - component: {fileID: 6657641040241450922}
+  - component: {fileID: 6371337205046582251}
   - component: {fileID: 5119759682887344806}
   m_Layer: 0
   m_Name: PlantEx2
@@ -101,6 +102,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &6371337205046582251
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3848391665051505318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: fd2d428f4f99f46478350601d0aea1ed, type: 3}
 --- !u!114 &5119759682887344806
 MonoBehaviour:
   m_ObjectHideFlags: 0
