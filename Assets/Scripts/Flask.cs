@@ -43,13 +43,40 @@ public class Flask : MonoBehaviour
 
         ListeIDIngredient.Sort();
 
-        if (IEnumerable.Equals(ListeIDIngredient, Poison))
+        int count = 0;
+        foreach(int id in ListeIDIngredient)
+        {
+            //if (Poison.Count > count)
+                if (id == Poison[count])
+                    count++;
+        }
+        if (count == ListeIDIngredient.Count)
             IDMelange = 0;
-        if (IEnumerable.Equals(ListeIDIngredient, Heal))
+
+
+        count = 0;
+        foreach (int id in ListeIDIngredient)
+        {
+            //if (Heal.Count > count)
+                if (id == Heal[count])
+                    count++;
+        }
+        if (count == ListeIDIngredient.Count)
             IDMelange = 1;
-        if (IEnumerable.Equals(ListeIDIngredient, Invisibility))
+
+
+        count = 0;
+        foreach (int id in ListeIDIngredient)
+        {
+            //if (Invisibility.Count > count)
+                if (id == Invisibility[count])
+                    count++;
+        }
+        if (count == ListeIDIngredient.Count)
             IDMelange = 2;
-        Liquid.GetComponent<Material>().color = Manager.GetListPotion()[IDMelange].p_Color;
+
+
+        Liquid.GetComponent<Renderer>().material.color = Manager.GetListPotion()[IDMelange].p_Color;
     }
 
     public int GetMelange()
