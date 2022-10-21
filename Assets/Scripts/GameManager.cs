@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     [SerializeField] private List<string> ListNamePotions;
     [SerializeField] private Transform PositionSpawn;
     [SerializeField] private GameObject DialogueBox;
+    [SerializeField] private TextMeshProUGUI ScoreTMP;
+    [SerializeField] private TextMeshProUGUI TimeTMP;
 
     private List<Potion> ListPotions = new List<Potion>();
 
@@ -31,8 +33,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     private int CharacterMove;
     public int m_speed;
     private int IDPotion;
-    private bool CharacterHappy;
     private Potion pot;
+    private int score;
+
+    private float time;
 
     [SerializeField] private bool waiting_potion;
     [SerializeField] private bool PreparingPotion;
@@ -45,10 +49,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     private void Start()
     {
+        score = 0;
         StartTime();
         PreparingPotion = false;
         CharacterMove = 0;
-        CharacterHappy = false;
 
         for (int i = 0; i<ListColorPotions.Count; i++)
         {
@@ -72,7 +76,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     private void Update()
     {
-        if (!PreparingPotion)
+        if (!PreparingPotion && time < 120)
         {
             CharacterID = (int)Random.Range(0, ListCharacters.Count);
             IDPotion = (int)Random.Range(0, ListPotions.Count);
@@ -84,6 +88,9 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
             PreparingPotion = true;
         }
         CharacterScenar(CharacterID);
+        ScoreTMP.text = score.ToString();
+        TimeTMP.text = "Time : " + ((int)time).ToString() + "s";
+        time += Time.deltaTime; 
 
         if (Input.GetButtonDown("XRI_Left_Trigger"))
         {
@@ -136,6 +143,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         }
         if (!waiting_potion && CharacterMove == 2 && Character.transform.eulerAngles.y < 90)
         {
+            DialogueBox.GetComponent<DialogueManager>().StopDialogue();
             Character.transform.eulerAngles += new Vector3(0, 1, 0) * m_speed * 70 * Time.deltaTime;
             if (Character.transform.eulerAngles.y >= 90)
             {
@@ -148,10 +156,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
             if (Character.transform.position.x >= 1)
             {
                 CharacterMove = 0;
-                DialogueBox.GetComponent<DialogueManager>().StopDialogue();
-                DialogueBox.SetActive(false);
                 Destroy(Character);
                 PreparingPotion = false;
+                DialogueBox.GetComponent<DialogueManager>().StopDialogueThx(true);
+                DialogueBox.SetActive(false);
             }
         }
 
@@ -182,9 +190,16 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         if (args.interactable.gameObject.tag == "Potion")
         {
             if (IDPotion == args.interactable.transform.GetChild(0).GetComponent<Flask>().GetMelange())
-                CharacterHappy = true;
+            {
+                DialogueBox.GetComponent<DialogueManager>().StartDialogueThx(true);
+                waiting_potion = false;
+                score++;
+            }
             else
-                CharacterHappy = false;
+            {
+                DialogueBox.GetComponent<DialogueManager>().StartDialogueThx(false);
+                waiting_potion = false;
+            }
             Destroy(args.interactable.gameObject);
         }
     }
@@ -195,17 +210,5 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         SceneManager.LoadScene(scene.name);
 
     }
-
-    public bool getCharacterState()
-    {
-        return CharacterHappy;
-    }
-
-    public int getCharacterMove()
-    {
-        return CharacterMove; ;
-    }
-
-
 
 }

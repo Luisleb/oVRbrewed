@@ -72,25 +72,6 @@ public class DialogueManager : MonoBehaviour
             Potion.SetActive(true);
             Liquid.SetActive(true);
         }
-        if(Manager.getCharacterMove() == 3)
-        {
-            if (Manager.getCharacterState())
-            {
-                foreach (char c in "Merci !")
-                {
-                    textComponent.text += c;
-                    yield return new WaitForSeconds(textSpeed);
-                }
-            }
-            else
-            {
-                foreach (char c in "Euuhh !")
-                {
-                    textComponent.text += c;
-                    yield return new WaitForSeconds(textSpeed);
-                }
-            }
-        }
     }
 
     private void NextLine()
@@ -108,5 +89,36 @@ public class DialogueManager : MonoBehaviour
         StopCoroutine(TypeLine());
         Potion.SetActive(false);
         Liquid.SetActive(false);
+    }
+
+    public void StopDialogueThx(bool happy)
+    {
+        StopCoroutine(DialogueThx(happy));
+    }
+
+    public void StartDialogueThx(bool happy)
+    {
+        textComponent.text = string.Empty;
+        StartCoroutine(DialogueThx(happy));
+    }
+
+    private IEnumerator DialogueThx(bool happy)
+    {
+        if (happy)
+        {
+            foreach (char c in "Merci !")
+            {
+                textComponent.text += c;
+                yield return new WaitForSeconds(textSpeed);
+            }
+        }
+        else
+        {
+            foreach (char c in "Euuhh !")
+            {
+                textComponent.text += c;
+                yield return new WaitForSeconds(textSpeed);
+            }
+        }
     }
 }
