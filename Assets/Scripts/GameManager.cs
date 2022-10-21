@@ -8,14 +8,28 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 {
     float beginTime = 0;
 
+    public struct Potion
+    {
+        public string p_Name;
+        public Color p_Color;
+    }
+
     [SerializeField] private Transform spotMushroom;
     [SerializeField] private CapsuleCollider mushroomsCollider;
     [SerializeField] private List<GameObject> ListCharacters;
+    [SerializeField] private List<Color> ListColorPotions;
+    [SerializeField] private List<string> ListNamePotions;
     [SerializeField] private Transform PositionSpawn;
+    [SerializeField] private GameObject DialogueBox;
+
+    private List<Potion> ListPotions = new List<Potion>();
+
     private GameObject Character;
     private int CharacterID;
     private int CharacterMove;
     public int m_speed;
+    private int IDPotion;
+    private Potion pot;
 
     [SerializeField] private bool waiting_potion;
     [SerializeField] private bool PreparingPotion;
@@ -31,6 +45,15 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         StartTime();
         PreparingPotion = false;
         CharacterMove = 0;
+
+        for (int i = 0; i<ListColorPotions.Count; i++)
+        {
+            pot = new Potion();
+            pot.p_Color = ListColorPotions[i];
+            pot.p_Name = ListNamePotions[i];
+
+            ListPotions.Add(pot);
+        }
     }
 
     public void StartTime()
@@ -48,6 +71,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         if (!PreparingPotion)
         {
             CharacterID = (int)Random.Range(0, ListCharacters.Count);
+            IDPotion = (int)Random.Range(0, ListPotions.Count);
 
             Character = Instantiate(ListCharacters[CharacterID]);
 
@@ -80,6 +104,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
                     Character.transform.eulerAngles = new Vector3(Character.transform.eulerAngles.x, 50, Character.transform.eulerAngles.z);
                     waiting_potion = true;
                     CharacterMove = 2;
+                    DialogueBox.SetActive(true);
+                    DialogueBox.GetComponent<DialogueManager>().StartDialogue(IDPotion);
                 }
             }
         }
@@ -94,11 +120,15 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
                     Character.transform.eulerAngles = new Vector3(Character.transform.eulerAngles.x, 0, Character.transform.eulerAngles.z);
                     waiting_potion = true;
                     CharacterMove = 2;
+                    DialogueBox.SetActive(true);
+                    DialogueBox.GetComponent<DialogueManager>().StartDialogue(IDPotion);
                 }
             }
         }
         if (!waiting_potion && CharacterMove == 2 && Character.transform.eulerAngles.y < 90)
         {
+            DialogueBox.GetComponent<DialogueManager>().StopDialogue();
+            DialogueBox.SetActive(false);
             Character.transform.eulerAngles += new Vector3(0, 1, 0) * m_speed * 70 * Time.deltaTime;
             if (Character.transform.eulerAngles.y >= 90)
             {
@@ -125,6 +155,11 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     public bool IsWaitingPotion()
     {
         return waiting_potion;
+    }
+
+    public List<Potion> GetListPotion()
+    {
+        return ListPotions;
     }
 
     public void CollideMushroom()
