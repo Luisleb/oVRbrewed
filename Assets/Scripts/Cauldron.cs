@@ -20,7 +20,7 @@ public class Cauldron : MonoBehaviour
             melange.Add(collision.transform.name);
             collision.transform.localPosition = new Vector3(0, 0, 0);
         }
-        if (collision.transform.tag == "Flask" && GameManager.Instance.IsWaitingPotion())
+        if (collision.transform.tag == "Flask")// && GameManager.Instance.IsWaitingPotion())
         {
             collision.transform.GetComponent<Flask>().SetMelange(melange); 
             //Reset de la marmite
