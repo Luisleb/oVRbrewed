@@ -92,8 +92,9 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         TimeTMP.text = "Time : " + ((int)time).ToString() + "s";
         time += Time.deltaTime; 
 
-        if (Input.GetButtonDown("XRI_Left_Trigger"))
+        if (Input.GetButtonDown("XRI_Left_SecondaryButton"))
         {
+            ReloadScene();
         }
     }
 
@@ -208,7 +209,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name);
-
     }
 
 }
