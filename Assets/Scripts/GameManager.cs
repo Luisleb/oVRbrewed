@@ -83,8 +83,9 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         }
         CharacterScenar(CharacterID);
 
-        if (Input.GetButtonDown("XRI_Left_Trigger"))
+        if (Input.GetButtonDown("XRI_Left_SecondaryButton"))
         {
+            ReloadScene();
         }
     }
 
@@ -190,7 +191,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name);
-
     }
 
 }
