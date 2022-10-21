@@ -476,7 +476,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a9eb02e0881f24c919f1c45c711741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  melange: []
   Cork: {fileID: 2318576717186254583}
   Liquid: {fileID: 4857426262115206574}
 --- !u!1 &7263093195462109209
@@ -490,7 +489,7 @@ GameObject:
   - component: {fileID: 4294172287073560160}
   m_Layer: 0
   m_Name: Potion
-  m_TagString: Untagged
+  m_TagString: Potion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

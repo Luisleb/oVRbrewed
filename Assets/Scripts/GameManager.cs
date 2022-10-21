@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     private int CharacterMove;
     public int m_speed;
     private int IDPotion;
+    private bool CharacterHappy;
     private Potion pot;
 
     [SerializeField] private bool waiting_potion;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         StartTime();
         PreparingPotion = false;
         CharacterMove = 0;
+        CharacterHappy = false;
 
         for (int i = 0; i<ListColorPotions.Count; i++)
         {
@@ -135,8 +137,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         }
         if (!waiting_potion && CharacterMove == 2 && Character.transform.eulerAngles.y < 90)
         {
-            DialogueBox.GetComponent<DialogueManager>().StopDialogue();
-            DialogueBox.SetActive(false);
             Character.transform.eulerAngles += new Vector3(0, 1, 0) * m_speed * 70 * Time.deltaTime;
             if (Character.transform.eulerAngles.y >= 90)
             {
@@ -149,6 +149,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
             if (Character.transform.position.x >= 1)
             {
                 CharacterMove = 0;
+                DialogueBox.GetComponent<DialogueManager>().StopDialogue();
+                DialogueBox.SetActive(false);
                 Destroy(Character);
                 PreparingPotion = false;
             }
@@ -181,9 +183,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         if (args.interactable.gameObject.tag == "Potion")
         {
             if (IDPotion == args.interactable.transform.GetChild(0).GetComponent<Flask>().GetMelange())
-                print("Merci");
+                CharacterHappy = true;
             else
-                print("euuuuh");
+                CharacterHappy = false;
+            Destroy(args.interactable.gameObject);
         }
     }
 
@@ -192,5 +195,17 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name);
     }
+
+    public bool getCharacterState()
+    {
+        return CharacterHappy;
+    }
+
+    public int getCharacterMove()
+    {
+        return CharacterMove; ;
+    }
+
+
 
 }
