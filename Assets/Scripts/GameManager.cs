@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
@@ -82,7 +83,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         }
         CharacterScenar(CharacterID);
 
+        if (Input.GetButtonDown("XRI_Left_Trigger"))
+        {
+        }
     }
+
+
 
     private void CharacterScenar(int ID)
     {
@@ -178,6 +184,13 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
             else
                 print("euuuuh");
         }
+    }
+
+    public void ReloadScene()
+    {
+        Scene scene = SceneManager.GetActiveScene(); 
+        SceneManager.LoadScene(scene.name);
+
     }
 
 }
