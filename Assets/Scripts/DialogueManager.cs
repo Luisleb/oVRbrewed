@@ -69,8 +69,6 @@ public class DialogueManager : MonoBehaviour
                 yield return new WaitForSeconds(textSpeed);
             }
             Liquid.GetComponent<Image>().color = Manager.GetListPotion()[IDPotion].p_Color;
-            Debug.Log(Manager.GetListPotion()[IDPotion].p_Color);
-            Debug.Log(Liquid.GetComponent<Image>().color);
             Potion.SetActive(true);
             Liquid.SetActive(true);
         }

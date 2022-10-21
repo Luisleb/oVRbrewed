@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Object
   - Flask
+  - Potion
+  - GameManager
   layers:
   - Default
   - TransparentFX

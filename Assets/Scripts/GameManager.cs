@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
@@ -85,10 +86,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     private void CharacterScenar(int ID)
     {
-        if (CharacterMove == 0 && Character.transform.position.x < -2.2)
+        if (CharacterMove == 0 && Character.transform.position.x < -3)
         {
             Character.transform.position += new Vector3(1, 0, 0) * m_speed * Time.deltaTime;
-            if (Character.transform.position.x >= -2.2)
+            if (Character.transform.position.x >= -3)
             {
                 CharacterMove = 1;
             }
@@ -147,6 +148,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         }
 
     }
+
     public string[] AskedRecipe()
     {
         return askedRecipe;
@@ -165,6 +167,17 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     public void CollideMushroom()
     {
 
+    }
+
+    public void CheckPotion(HoverEnterEventArgs args)
+    {
+        if (args.interactable.gameObject.tag == "Potion")
+        {
+            if (IDPotion == args.interactable.transform.GetChild(0).GetComponent<Flask>().GetMelange())
+                print("Merci");
+            else
+                print("euuuuh");
+        }
     }
 
 }
