@@ -12,7 +12,7 @@ public class Flask : MonoBehaviour
     private List<int> Poison = new List<int>() { 2, 3 };
     private List<int> Heal = new List<int>() { 0, 1 };
     private List<int> Invisibility = new List<int>() { 0, 3 };
-
+    [SerializeField] private AudioSource soundEffect;
 
     public void Start()
     {
@@ -27,7 +27,7 @@ public class Flask : MonoBehaviour
         Cork.SetActive(true);
         Liquid.SetActive(true);
         List<int> ListeIDIngredient = new List<int>();
-
+        soundEffect.Play();
 
         foreach (string ingrédient in p_melange)
         {
